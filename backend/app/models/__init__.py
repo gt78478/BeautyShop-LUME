@@ -1,0 +1,20 @@
+from app.models.entities import (  # noqa: F401
+    Brand,
+    Cart,
+    CartItem,
+    Category,
+    Order,
+    OrderItem,
+    OrderStatus,
+    OrderStatusHistory,
+    Payment,
+    Product,
+    ProductImage,
+    Review,
+    Shipment,
+    ShipmentStatus,
+    User,
+    UserAddress,
+    WishlistItem,
+)
+

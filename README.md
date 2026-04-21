@@ -156,7 +156,31 @@ cd beautyshop-chile
 docker-compose up -d postgres
 ```
 
-> Или укажи строку подключения к существующей БД в `.env`
+> Для быстрого локального старта PostgreSQL не обязателен: backend по умолчанию использует SQLite `backend/beautyshop.db`.
+
+### Запуск всего проекта через Docker Compose
+
+```bash
+docker compose up --build
+```
+
+После запуска:
+
+- Frontend: `http://localhost:5173`
+- API: `http://localhost:8000`
+- Swagger UI: `http://localhost:8000/docs`
+
+Остановить:
+
+```bash
+docker compose down
+```
+
+Сбросить PostgreSQL-данные:
+
+```bash
+docker compose down -v
+```
 
 ### 3. Настройка бэкенда
 
@@ -164,9 +188,9 @@ docker-compose up -d postgres
 cd backend
 
 # Создать виртуальное окружение
-python -m venv venv
-source venv/bin/activate        # Linux / macOS
-# venv\Scripts\activate         # Windows
+python3 -m venv .venv
+source .venv/bin/activate        # Linux / macOS
+# .venv\Scripts\activate         # Windows
 
 # Установить зависимости
 pip install -r requirements.txt
@@ -174,18 +198,17 @@ pip install -r requirements.txt
 # Скопировать и заполнить переменные окружения
 cp .env.example .env
 
-# Применить миграции
-alembic upgrade head
-
-# Загрузить тестовые данные
-python seed.py
-
 # Запустить сервер
 uvicorn app.main:app --reload --port 8000
 ```
 
 API будет доступно на: `http://localhost:8000`
 Swagger UI: `http://localhost:8000/docs`
+
+Таблицы и демо-данные создаются автоматически при старте. Демо-аккаунты:
+
+- `demo@beautyshop.cl` / `demo1234`
+- `admin@beautyshop.cl` / `admin123`
 
 ### 4. Настройка фронтенда
 
