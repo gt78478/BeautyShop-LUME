@@ -21,6 +21,7 @@ def product_to_read(product: Product) -> ProductRead:
         category=CategoryRead.model_validate(product.category) if product.category else None,
         brand=BrandRead.model_validate(product.brand) if product.brand else None,
         image_url=image,
+        is_active=product.is_active,
     )
 
 
@@ -42,6 +43,7 @@ def cart_to_read(cart: Cart) -> CartRead:
 def order_to_read(order: Order) -> OrderRead:
     return OrderRead(
         id=order.id,
+        user_id=order.user_id,
         status=order.status.name if order.status else "unknown",
         address=order.address,
         subtotal_cents=order.subtotal_cents,
@@ -59,4 +61,3 @@ def order_to_read(order: Order) -> OrderRead:
             for item in order.items
         ],
     )
-

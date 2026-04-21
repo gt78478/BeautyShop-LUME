@@ -27,7 +27,7 @@ class UserAddress(Base):
     label: Mapped[str | None] = mapped_column(String(80))
     full_name: Mapped[str] = mapped_column(String(160))
     phone: Mapped[str | None] = mapped_column(String(40))
-    country: Mapped[str | None] = mapped_column(String(80), default="Chile")
+    country: Mapped[str | None] = mapped_column(String(80), default="Чили")
     city: Mapped[str | None] = mapped_column(String(80))
     commune: Mapped[str | None] = mapped_column(String(80))
     address_line1: Mapped[str | None] = mapped_column(String(255))
@@ -167,7 +167,7 @@ class Payment(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     order_id: Mapped[int] = mapped_column(ForeignKey("orders.id", ondelete="CASCADE"))
     provider: Mapped[str] = mapped_column(String(80), default="mercado_pago")
-    status: Mapped[str] = mapped_column(String(80), default="created")
+    status: Mapped[str] = mapped_column(String(80), default="создан")
     amount_cents: Mapped[int] = mapped_column(Integer)
     provider_payment_id: Mapped[str | None] = mapped_column(String(160))
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
@@ -206,4 +206,3 @@ class Review(Base):
     rating: Mapped[int] = mapped_column(Integer)
     body: Mapped[str] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
-

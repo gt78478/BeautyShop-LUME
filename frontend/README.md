@@ -1,6 +1,8 @@
-# BeautyShop Chile Frontend
+# БьютиШоп Чили: frontend
 
-Vanilla JS + Vite storefront for the BeautyShop Chile API.
+Frontend-часть учебного интернет-магазина косметики. Интерфейс написан на чистом JavaScript и собирается через Vite.
+
+## Локальный запуск
 
 ```bash
 npm install
@@ -8,5 +10,14 @@ cp .env.example .env
 npm run dev
 ```
 
-Open `http://localhost:5173`.
+Сайт будет доступен по адресу:
 
+```text
+http://localhost:5173
+```
+
+Основные страницы:
+
+- `/` — витрина магазина
+- `/auth` — вход и регистрация
+- `/admin` — админ-панель

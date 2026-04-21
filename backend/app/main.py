@@ -7,7 +7,7 @@ from app.core.database import Base, SessionLocal, engine
 from app.seed import seed_database
 
 
-app = FastAPI(title="BeautyShop Chile API", version="1.0.0", debug=settings.debug)
+app = FastAPI(title="БьютиШоп Чили API", version="1.0.0", debug=settings.debug)
 
 app.add_middleware(
     CORSMiddleware,
@@ -31,4 +31,3 @@ def health() -> dict:
 
 
 app.include_router(router)
-

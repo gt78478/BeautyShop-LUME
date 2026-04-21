@@ -10,12 +10,12 @@ class TokenPair(BaseModel):
 
 
 class RegisterRequest(BaseModel):
-    email: EmailStr
+    email: str = Field(min_length=3, pattern=r".+@.+")
     password: str = Field(min_length=6)
 
 
 class LoginRequest(BaseModel):
-    email: EmailStr
+    email: str = Field(min_length=3)
     password: str
 
 
@@ -53,6 +53,32 @@ class ProductRead(BaseModel):
     category: CategoryRead | None = None
     brand: BrandRead | None = None
     image_url: str | None = None
+    is_active: bool = True
+
+
+class ProductCreate(BaseModel):
+    name: str = Field(min_length=2)
+    category: str = Field(min_length=2)
+    brand: str = Field(min_length=2)
+    description: str | None = None
+    amount: int = Field(default=0, ge=0)
+    price_cents: int = Field(gt=0)
+    image_url: str | None = None
+
+
+class ProductUpdate(BaseModel):
+    name: str | None = Field(default=None, min_length=2)
+    category: str | None = Field(default=None, min_length=2)
+    brand: str | None = Field(default=None, min_length=2)
+    description: str | None = None
+    amount: int | None = Field(default=None, ge=0)
+    price_cents: int | None = Field(default=None, gt=0)
+    image_url: str | None = None
+    is_active: bool | None = None
+
+
+class OrderStatusUpdate(BaseModel):
+    status: str = Field(min_length=2)
 
 
 class ProductList(BaseModel):
@@ -83,7 +109,7 @@ class CartRead(BaseModel):
 class AddressCreate(BaseModel):
     full_name: str
     phone: str | None = None
-    country: str = "Chile"
+    country: str = "Чили"
     city: str
     commune: str
     address_line1: str
@@ -107,6 +133,7 @@ class OrderItemRead(BaseModel):
 
 class OrderRead(BaseModel):
     id: int
+    user_id: int
     status: str
     address: str
     subtotal_cents: int
@@ -145,4 +172,3 @@ class ReviewRead(BaseModel):
     rating: int
     body: str
     created_at: datetime
-

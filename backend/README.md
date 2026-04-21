@@ -1,8 +1,8 @@
-# BeautyShop Chile Backend
+# БьютиШоп Чили: backend
 
-FastAPI API for the BeautyShop Chile practice project.
+Backend-часть учебного интернет-магазина косметики. API написан на FastAPI, данные хранятся через SQLAlchemy. По умолчанию для быстрого запуска используется SQLite, а в Docker Compose подключается PostgreSQL.
 
-## Run locally
+## Локальный запуск
 
 ```bash
 python3 -m venv .venv
@@ -12,13 +12,19 @@ cp .env.example .env
 uvicorn app.main:app --reload --port 8000
 ```
 
-The default `DATABASE_URL` uses SQLite for a quick start. For PostgreSQL, run root `docker-compose.yml` and set:
+Документация API:
+
+```text
+http://localhost:8000/docs
+```
+
+Для PostgreSQL запусти корневой `docker-compose.yml` и укажи:
 
 ```env
 DATABASE_URL=postgresql+psycopg://beautyshop:beautyshop@localhost:5432/beautyshop
 ```
 
-Seed users:
+Демо-пользователи:
 
 - `demo@beautyshop.cl` / `demo1234`
 - `admin@beautyshop.cl` / `admin123`
