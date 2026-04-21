@@ -1,0 +1,435 @@
+{
+  "version": "1.0.0",
+  "darkMode": true,
+  "gridEnabling": false,
+  "detailLevel": "All",
+  "tablePositions": [
+    {
+      "name": "users",
+      "schemaName": "public",
+      "x": 1205.1243452849885,
+      "y": 1017.242127611378
+    },
+    {
+      "name": "tags",
+      "schemaName": "public",
+      "x": -113.85456874923554,
+      "y": 991.7174476622087
+    },
+    {
+      "name": "brands",
+      "schemaName": "public",
+      "x": -110.80398523860302,
+      "y": 1113.4026722385997
+    },
+    {
+      "name": "order_statuses",
+      "schemaName": "public",
+      "x": 1935.8414787784272,
+      "y": 784.2220151124264
+    },
+    {
+      "name": "shipment_statuses",
+      "schemaName": "public",
+      "x": 2993.6100968247747,
+      "y": 1270.1103435219984
+    },
+    {
+      "name": "user_addresses",
+      "schemaName": "public",
+      "x": 1785.580935103504,
+      "y": 1352.3550111845109
+    },
+    {
+      "name": "products",
+      "schemaName": "public",
+      "x": 230.44199305005048,
+      "y": 852.3222440871739
+    },
+    {
+      "name": "products_images",
+      "schemaName": "public",
+      "x": -142.54941972441628,
+      "y": 787.2645824986898
+    },
+    {
+      "name": "cart",
+      "schemaName": "public",
+      "x": 877.3146916206086,
+      "y": 985.0490116966969
+    },
+    {
+      "name": "cart_items",
+      "schemaName": "public",
+      "x": 514.3237258640423,
+      "y": 953.0490116966969
+    },
+    {
+      "name": "orders",
+      "schemaName": "public",
+      "x": 2274.178135475363,
+      "y": 1004.9036548180198
+    },
+    {
+      "name": "order_items",
+      "schemaName": "public",
+      "x": 800.7739265962533,
+      "y": 654.7953497348017
+    },
+    {
+      "name": "order_status_history",
+      "schemaName": "public",
+      "x": 1600.6420117600996,
+      "y": 673.0217159657653
+    },
+    {
+      "name": "payments",
+      "schemaName": "public",
+      "x": 2648.1185576651496,
+      "y": 460.8392199625215
+    },
+    {
+      "name": "shipments",
+      "schemaName": "public",
+      "x": 2648.1185576651496,
+      "y": 972.9036548180197
+    },
+    {
+      "name": "shipment_events",
+      "schemaName": "public",
+      "x": 2993.6100968247747,
+      "y": 930.9175245484183
+    }
+  ],
+  "tableGroupCollapseStates": [],
+  "stickyNoteLayouts": [],
+  "referencePaths": [
+    {
+      "firstFieldNames": [
+        "user_id"
+      ],
+      "firstTableName": "user_addresses",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "users",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "tag_id"
+      ],
+      "firstTableName": "products",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "tags",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "brand_id"
+      ],
+      "firstTableName": "products",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "brands",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": [
+        {
+          "x": 467.7111216542636,
+          "y": 1005.9976410242143
+        },
+        {
+          "x": 467.7111216542636,
+          "y": 1171.0780691756402
+        }
+      ]
+    },
+    {
+      "firstFieldNames": [
+        "product_id"
+      ],
+      "firstTableName": "products_images",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "products",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "user_id"
+      ],
+      "firstTableName": "cart",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "users",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "cart_id"
+      ],
+      "firstTableName": "cart_items",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "cart",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "product_id"
+      ],
+      "firstTableName": "cart_items",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "products",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "user_id"
+      ],
+      "firstTableName": "orders",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "users",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "user_address_id"
+      ],
+      "firstTableName": "orders",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "user_addresses",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "order_status_id"
+      ],
+      "firstTableName": "orders",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "order_statuses",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "order_id"
+      ],
+      "firstTableName": "order_items",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "orders",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": [
+        {
+          "x": 1396.5231559054876,
+          "y": 542.8687233186
+        },
+        {
+          "x": 2254.178135475363,
+          "y": 542.8687233186
+        }
+      ]
+    },
+    {
+      "firstFieldNames": [
+        "product_id"
+      ],
+      "firstTableName": "order_items",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "products",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "order_id"
+      ],
+      "firstTableName": "order_status_history",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "orders",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": [
+        {
+          "x": 2231.6535529947487,
+          "y": 756.1092627473977
+        },
+        {
+          "x": 2231.6535529947487,
+          "y": 1052.9036548180197
+        }
+      ]
+    },
+    {
+      "firstFieldNames": [
+        "changed_by_user"
+      ],
+      "firstTableName": "order_status_history",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "users",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "old_status_id"
+      ],
+      "firstTableName": "order_status_history",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "order_statuses",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "new_status_id"
+      ],
+      "firstTableName": "order_status_history",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "order_statuses",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "order_id"
+      ],
+      "firstTableName": "payments",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "orders",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "order_id"
+      ],
+      "firstTableName": "shipments",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "orders",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "shipment_status_id"
+      ],
+      "firstTableName": "shipments",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "shipment_statuses",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "shipment_id"
+      ],
+      "firstTableName": "shipment_events",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "shipments",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    }
+  ]
+}

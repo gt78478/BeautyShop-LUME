@@ -1,0 +1,180 @@
+Project shop_db {
+  database_type: "PostgreSQL"
+  Note: "Схема интернет-магазина"
+}
+
+Table users {
+  id integer [pk, increment]
+  email text [not null, unique]
+  password_hash text [not null]
+  role text [not null]
+  is_active boolean [default: true]
+}
+
+Table tags {
+  id integer [pk, increment]
+  name text [not null]
+}
+
+Table brands {
+  id integer [pk, increment]
+  name text [not null]
+}
+
+Table order_statuses {
+  id integer [pk, increment]
+  name text [not null, unique]
+}
+
+Table shipment_statuses {
+  id integer [pk, increment]
+  name text [not null, unique]
+}
+
+Table user_addresses {
+  id integer [pk, increment]
+  user_id integer [not null]
+  label text
+  full_name text [not null]
+  phone text
+  country text
+  city text
+  commune text
+  address_line1 text
+  address_line2 text
+  postal_code text
+  is_default boolean [default: false]
+}
+
+Table products {
+  id integer [pk, increment]
+  name text [not null]
+  tag_id integer
+  brand_id integer
+  description text
+  amount integer
+  price_cents integer [not null]
+  is_active boolean [default: true]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table products_images {
+  id integer [pk, increment]
+  product_id integer [not null]
+  image_path text [not null]
+  sort_order integer
+}
+
+Table cart {
+  id integer [pk, increment]
+  user_id integer [not null, unique]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table cart_items {
+  id integer [pk, increment]
+  cart_id integer [not null]
+  product_id integer [not null]
+  quantity integer [not null]
+  unit_price_cents integer [not null]
+}
+
+Table orders {
+  id integer [pk, increment]
+  order_status_id integer
+  user_id integer [not null]
+  user_address_id integer [null]
+  address text [not null]
+  subtotal_cents integer
+  shipping_cents integer
+  discount_cents integer
+  total_cents integer
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table order_items {
+  id integer [pk, increment]
+  order_id integer [not null]
+  product_id integer
+  product_name_snapshot text
+  unit_price_cents_snapshot integer
+  quantity integer
+  line_total_cents integer
+}
+
+Table order_status_history {
+  id integer [pk, increment]
+  order_id integer [not null]
+  changed_by_user integer
+  old_status_id integer
+  new_status_id integer
+  created_at timestamp [default: `now()`]
+  note text
+}
+
+Table payments {
+  id integer [pk, increment]
+  order_id integer [not null]
+  provider text
+  status text
+  amount_cents integer
+  provider_payment_id text
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  raw_payload jsonb
+}
+
+Table shipments {
+  id integer [pk, increment]
+  order_id integer [not null]
+  shipment_status_id integer
+  carrier text
+  tracking_number text
+  label_url text
+  shipping_cost_cents integer
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table shipment_events {
+  id integer [pk, increment]
+  shipment_id integer [not null]
+  status_before text
+  status_new text
+  description text
+  event_time timestamp
+  raw_payload text
+}
+
+Ref: user_addresses.user_id > users.id [delete: cascade]
+
+Ref: products.tag_id > tags.id
+Ref: products.brand_id > brands.id
+
+Ref: products_images.product_id > products.id [delete: cascade]
+
+Ref: cart.user_id - users.id
+Ref: cart_items.cart_id > cart.id [delete: cascade]
+Ref: cart_items.product_id > products.id
+
+Ref: orders.user_id > users.id
+Ref: orders.user_address_id > user_addresses.id
+Ref: orders.order_status_id > order_statuses.id
+
+Ref: order_items.order_id > orders.id [delete: cascade]
+Ref: order_items.product_id > products.id
+
+Ref: order_status_history.order_id > orders.id [delete: cascade]
+Ref: order_status_history.changed_by_user > users.id
+Ref: order_status_history.old_status_id > order_statuses.id
+Ref: order_status_history.new_status_id > order_statuses.id
+
+Ref: payments.order_id > orders.id [delete: cascade]
+
+Ref: shipments.order_id > orders.id [delete: cascade]
+Ref: shipments.shipment_status_id > shipment_statuses.id
+
+Ref: shipment_events.shipment_id > shipments.id [delete: cascade]
