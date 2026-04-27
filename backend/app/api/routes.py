@@ -1,3 +1,4 @@
+# Самый большой файл. В нём все API-запросы backend
 import json
 from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session, joinedload

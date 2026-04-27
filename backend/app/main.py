@@ -1,3 +1,4 @@
+# Главный вход в backend
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 

@@ -1,3 +1,4 @@
+# Файл подключения к базе данных
 from collections.abc import Generator
 
 from sqlalchemy import create_engine
