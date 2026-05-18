@@ -21,6 +21,11 @@ export function StoreLayout({
   const headerRef = useRef(null);
   const shaderCanvasRef = useRef(null);
   const shaderMouseRef = useRef({ x: 0.5, y: 0.5 });
+  const shaderTrailRef = useRef([
+    { x: 0.5, y: 0.5 },
+    { x: 0.5, y: 0.5 },
+    { x: 0.5, y: 0.5 },
+  ]);
 
   useEffect(() => {
     const canvas = shaderCanvasRef.current;
@@ -43,6 +48,9 @@ export function StoreLayout({
 
       uniform vec2 resolution;
       uniform vec2 mouse;
+      uniform vec2 trailA;
+      uniform vec2 trailB;
+      uniform vec2 trailC;
       uniform float time;
 
       float hash(vec2 p) {
@@ -83,35 +91,47 @@ export function StoreLayout({
 
         vec2 m = mouse;
         m.x *= resolution.x / resolution.y;
-        float cursor = exp(-distance(p, m) * 4.8);
+        vec2 ta = trailA;
+        vec2 tb = trailB;
+        vec2 tc = trailC;
+        ta.x *= resolution.x / resolution.y;
+        tb.x *= resolution.x / resolution.y;
+        tc.x *= resolution.x / resolution.y;
+
+        float cursor = exp(-distance(p, m) * 4.4);
+        float trail =
+          exp(-distance(p, ta) * 3.2) * 0.52 +
+          exp(-distance(p, tb) * 2.4) * 0.36 +
+          exp(-distance(p, tc) * 1.8) * 0.26;
 
         vec2 flow = p * 2.0;
         flow += 0.18 * vec2(
           sin(time * 0.37 + p.y * 5.0),
           cos(time * 0.31 + p.x * 4.0)
         );
-        flow += cursor * 0.34;
+        flow += cursor * 0.28 + trail * 0.22;
 
         float field = fbm(flow + vec2(time * 0.035, -time * 0.025));
         field += 0.35 * fbm(flow * 2.2 - vec2(time * 0.07, time * 0.05));
 
         float contour = smoothstep(0.47, 0.56, field) - smoothstep(0.63, 0.72, field);
-        float bloom = smoothstep(0.58, 1.02, field + cursor * 0.32);
+        float bloom = smoothstep(0.52, 1.02, field + cursor * 0.28 + trail * 0.22);
         float vignette = smoothstep(0.96, 0.2, distance(uv, vec2(0.5)));
 
-        vec3 base = vec3(0.075, 0.055, 0.048);
-        vec3 rose = vec3(0.63, 0.39, 0.34);
-        vec3 sage = vec3(0.52, 0.62, 0.40);
-        vec3 cream = vec3(0.94, 0.83, 0.76);
+        vec3 base = vec3(0.16, 0.125, 0.112);
+        vec3 rose = vec3(0.78, 0.52, 0.47);
+        vec3 sage = vec3(0.66, 0.76, 0.52);
+        vec3 cream = vec3(1.0, 0.9, 0.82);
 
         vec3 color = base;
-        color = mix(color, rose, smoothstep(0.24, 0.88, field) * 0.62);
-        color = mix(color, sage, smoothstep(0.42, 1.0, fbm(flow * 1.15 + 4.0)) * 0.42);
-        color += cream * contour * 0.08;
-        color += cream * bloom * (0.08 + cursor * 0.12);
-        color *= 0.72 + vignette * 0.44;
+        color = mix(color, rose, smoothstep(0.2, 0.86, field) * 0.48);
+        color = mix(color, sage, smoothstep(0.36, 1.0, fbm(flow * 1.15 + 4.0)) * 0.34);
+        color += cream * contour * 0.045;
+        color += cream * bloom * (0.07 + cursor * 0.1 + trail * 0.16);
+        color += vec3(0.08, 0.064, 0.052);
+        color *= 0.82 + vignette * 0.34;
 
-        gl_FragColor = vec4(color, 0.96);
+        gl_FragColor = vec4(color, 0.9);
       }
     `;
 
@@ -140,6 +160,9 @@ export function StoreLayout({
 
     const resolution = gl.getUniformLocation(program, "resolution");
     const mouse = gl.getUniformLocation(program, "mouse");
+    const trailA = gl.getUniformLocation(program, "trailA");
+    const trailB = gl.getUniformLocation(program, "trailB");
+    const trailC = gl.getUniformLocation(program, "trailC");
     const time = gl.getUniformLocation(program, "time");
     let frame = 0;
 
@@ -157,8 +180,21 @@ export function StoreLayout({
 
     function render(now) {
       resize();
+      const [a, b, c] = shaderTrailRef.current;
+      const target = shaderMouseRef.current;
+
+      a.x += (target.x - a.x) * 0.15;
+      a.y += (target.y - a.y) * 0.15;
+      b.x += (a.x - b.x) * 0.08;
+      b.y += (a.y - b.y) * 0.08;
+      c.x += (b.x - c.x) * 0.045;
+      c.y += (b.y - c.y) * 0.045;
+
       gl.uniform2f(resolution, canvas.width, canvas.height);
       gl.uniform2f(mouse, shaderMouseRef.current.x, shaderMouseRef.current.y);
+      gl.uniform2f(trailA, a.x, a.y);
+      gl.uniform2f(trailB, b.x, b.y);
+      gl.uniform2f(trailC, c.x, c.y);
       gl.uniform1f(time, now * 0.001);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
       frame = requestAnimationFrame(render);
