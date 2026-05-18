@@ -263,16 +263,35 @@ export function StoreLayout({
             <LangSelect lang={lang} changeLang={changeLang} />
             {user ? (
               <button className="tool-button" type="button" onClick={logout} aria-label={t("logout")} title={t("logout")}>
-                <span aria-hidden="true">↪</span>
+                <span className="logout-icon" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" focusable="false">
+                    <path d="M13 7H7.5v18H13" />
+                    <path d="M14.5 16h11" />
+                    <path d="M21.5 11.5 26 16l-4.5 4.5" />
+                  </svg>
+                </span>
               </button>
             ) : (
               <button className="tool-button" type="button" onClick={() => router.push("/auth")} aria-label={t("login")} title={t("login")}>
-                <span aria-hidden="true">↩</span>
+                <span className="logout-icon" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" focusable="false">
+                    <path d="M19 7h5.5v18H19" />
+                    <path d="M6.5 16h11" />
+                    <path d="M13.5 11.5 18 16l-4.5 4.5" />
+                  </svg>
+                </span>
               </button>
             )}
             <button className="tool-button cart-tool" type="button" onClick={() => setCartOpen(true)} aria-label={t("bag")} title={t("bag")}>
-              <span aria-hidden="true">▢</span>
-              {cart.items.length > 0 && <strong>{cart.items.length}</strong>}
+              <span className="bag-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <path d="M8.2 11.3h15.6l1.5 15.2H6.7l1.5-15.2Z" />
+                  <path d="M11.6 11.1V8.8a4.4 4.4 0 0 1 8.8 0v2.3" />
+                  <path d="M11.6 13.1v.1" />
+                  <path d="M20.4 13.1v.1" />
+                </svg>
+              </span>
+              <strong>{cart.items.length}</strong>
             </button>
           </div>
         </div>
