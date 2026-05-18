@@ -86,13 +86,14 @@ export function Catalog({ products, meta, filters, setFilters, t, addCart }) {
     <section className="section catalog-section" id="catalog">
       <div className="catalog-layout">
         <aside className="catalog-rail" aria-label={t("filters")}>
-          <label className="search-line">
+          <label className="search-line" data-placeholder={t("findOwn")}>
             <span aria-hidden="true">⌕</span>
             <input
               value={filters.q || ""}
-              placeholder={t("findOwn")}
+              aria-label={t("findOwn")}
               onChange={(event) => updateSearch(event.target.value)}
             />
+            {!filters.q && <em aria-hidden="true">{t("findOwn")}</em>}
           </label>
           <FilterGroup
             label={t("category")}

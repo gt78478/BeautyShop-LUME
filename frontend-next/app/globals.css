@@ -716,6 +716,36 @@ h3 {
   line-height: 1;
 }
 
+.search-line::before {
+  pointer-events: none;
+}
+
+.search-line::after {
+  pointer-events: none;
+}
+
+.search-line em {
+  position: absolute;
+  left: 28px;
+  right: 0;
+  bottom: 11px;
+  color: rgba(98, 88, 82, 0.58);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.2;
+  pointer-events: none;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+}
+
+.search-line:focus-within em {
+  opacity: 1;
+  animation: search-placeholder-type 1050ms steps(19, end) both;
+}
+
 .search-line input,
 .filter-field input {
   min-height: 42px;
@@ -819,6 +849,16 @@ h3 {
   display: inline-block;
   background: #9fb05f;
   vertical-align: 1px;
+}
+
+@keyframes search-placeholder-type {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: calc(100% - 28px);
+  }
 }
 
 input,
