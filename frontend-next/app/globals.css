@@ -365,41 +365,6 @@ textarea {
   transform: scale(1.025);
 }
 
-.product-badges {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  display: flex;
-  align-items: stretch;
-  height: 30px;
-  color: #111;
-  font-size: 10px;
-  font-weight: 900;
-  line-height: 30px;
-  text-transform: uppercase;
-}
-
-.flash-badge,
-.hit-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 26px;
-  height: 30px;
-}
-
-.flash-badge {
-  background: #ff6b00;
-  color: white;
-  font-size: 17px;
-}
-
-.hit-badge {
-  min-width: 31px;
-  background: #f4ff00;
-}
-
 .favorite-button,
 .quick-cart {
   position: absolute;
@@ -491,44 +456,6 @@ textarea {
   font-weight: 900;
   letter-spacing: 1.7px;
   text-transform: uppercase;
-}
-
-.shade-row {
-  display: flex;
-  align-items: center;
-  min-height: 16px;
-}
-
-.shade {
-  width: 16px;
-  height: 16px;
-  margin-left: -4px;
-  border: 1px solid rgba(255, 255, 255, 0.82);
-  border-radius: 999px;
-  box-shadow: 0 1px 3px rgba(21, 17, 15, 0.12);
-}
-
-.shade:first-child {
-  margin-left: 0;
-}
-
-.shade.warm {
-  background: linear-gradient(135deg, #e2bea8 0 50%, #7f5f50 50%);
-}
-
-.shade.taupe {
-  background: linear-gradient(135deg, #d5c6b9 0 50%, #928073 50%);
-}
-
-.shade.slate {
-  background: linear-gradient(135deg, #434955 0 50%, #ece7de 50%);
-}
-
-.shade-row strong {
-  margin-left: 6px;
-  color: #292929;
-  font-size: 11px;
-  font-weight: 900;
 }
 
 .product h3 {

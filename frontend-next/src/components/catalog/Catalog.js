@@ -1,4 +1,6 @@
-import { clp } from "../../lib/format.js";
+const number = new Intl.NumberFormat("ru-RU", {
+  maximumFractionDigits: 0,
+});
 
 export function Catalog({ products, meta, filters, setFilters, t, addCart }) {
   function submit(event) {
@@ -30,10 +32,6 @@ export function Catalog({ products, meta, filters, setFilters, t, addCart }) {
         {products.length ? products.map((product) => (
           <article className="product" key={product.id}>
             <div className="product-media">
-              <div className="product-badges" aria-hidden="true">
-                <span className="flash-badge">↯</span>
-                <span className="hit-badge">HIT</span>
-              </div>
               <button className="favorite-button" type="button" aria-label={t("favorite")}>♡</button>
               <img src={product.image_url} alt={product.name} />
               <button className="quick-cart" type="button" onClick={() => addCart(product.id)} aria-label={t("add")}>
@@ -41,16 +39,10 @@ export function Catalog({ products, meta, filters, setFilters, t, addCart }) {
               </button>
             </div>
             <div className="product-body">
-              <div className="shade-row" aria-hidden="true">
-                <span className="shade warm" />
-                <span className="shade taupe" />
-                <span className="shade slate" />
-                <strong>+2</strong>
-              </div>
               <div className="meta-row"><span>{product.category?.name || "Beauty"}</span></div>
               <h3>{product.name}</h3>
               <div className="buy-row">
-                <strong>{t("fromPrice")} {clp(product.price_cents)}</strong>
+                <strong>{number.format(Math.round(product.price_cents / 100))}</strong>
               </div>
             </div>
           </article>
