@@ -254,8 +254,8 @@ export function StoreLayout({
           <button className="nav-button" onClick={() => router.push("/orders")}>{t("orders")}</button>
           {user?.role === "admin" && <button className="nav-button" onClick={() => router.push("/admin")}>{t("adminPanel")}</button>}
         </nav>
-        <button className="brand" onClick={() => router.push("/")}>
-          БьютиШоп <span>Чили</span>
+        <button className="brand shader-brand" onClick={() => router.push("/")} aria-label="LUME">
+          <span aria-hidden="true">LUME</span>
         </button>
         <div className="actions">
           <LangSelect lang={lang} changeLang={changeLang} />
