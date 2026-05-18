@@ -341,14 +341,18 @@ textarea {
 }
 
 .product {
+  position: relative;
   min-width: 0;
+  aspect-ratio: 2 / 3;
   background: transparent;
+  overflow: hidden;
 }
 
 .product-media {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 100%;
   background: #f1f1f1;
   overflow: hidden;
 }
@@ -437,9 +441,22 @@ textarea {
 }
 
 .product-body {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: grid;
   gap: 10px;
-  padding: 16px 0 0;
+  padding: 18px 0 0;
+  background: var(--paper);
+  transform: translateY(0);
+  transition: transform 220ms ease;
+  z-index: 3;
+}
+
+.product:hover .product-body,
+.product:focus-within .product-body {
+  transform: translateY(100%);
 }
 
 .product p,
