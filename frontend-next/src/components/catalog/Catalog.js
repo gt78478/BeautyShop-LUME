@@ -21,19 +21,26 @@ function FilterGroup({ label, options, selected, onToggle, searchPlaceholder }) 
 
   return (
     <div className={`filter-block${open ? " open" : ""}`}>
-      <button className="filter-trigger" type="button" onClick={() => setOpen((value) => !value)}>
-        <span>{label}</span>
+      <div className="filter-trigger">
+        {!open ? (
+          <button className="filter-label-button" type="button" onClick={() => setOpen(true)}>
+            <span className="filter-label">{label}</span>
+          </button>
+        ) : (
+          <label className="filter-input-wrap">
+            {!query && <span className="filter-search-label">{searchPlaceholder}</span>}
+            <input
+              aria-label={label}
+              autoFocus
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+          </label>
+        )}
         <strong>{selected.length ? selected.length : ""}</strong>
-        <i aria-hidden="true">›</i>
-      </button>
-      <div className="filter-field">
-        <input
-          aria-label={label}
-          disabled={!open}
-          placeholder={searchPlaceholder}
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
+        <button className="filter-toggle" type="button" onClick={() => setOpen((value) => !value)} aria-label={label}>
+          <i aria-hidden="true">›</i>
+        </button>
       </div>
       {open && (
         <div className="filter-options">
