@@ -921,16 +921,8 @@ textarea {
   min-width: 0;
   aspect-ratio: 2 / 3;
   --product-copy-height: 118px;
-  --product-image-ratio: 2 / 3;
   background: transparent;
   overflow: hidden;
-  transition: aspect-ratio 220ms ease;
-}
-
-.product:hover,
-.product:focus-within {
-  aspect-ratio: var(--product-image-ratio);
-  z-index: 4;
 }
 
 .product-media {

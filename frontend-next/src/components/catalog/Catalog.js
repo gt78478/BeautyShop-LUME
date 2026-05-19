@@ -57,17 +57,6 @@ export function Catalog({ products, meta, filters, setFilters, t, addCart }) {
   const selectedCategories = list(filters.category);
   const selectedBrands = list(filters.brand);
 
-  function setImageRatio(event) {
-    const image = event.currentTarget;
-
-    if (!image.naturalWidth || !image.naturalHeight) return;
-
-    image.closest(".product")?.style.setProperty(
-      "--product-image-ratio",
-      `${image.naturalWidth} / ${image.naturalHeight}`,
-    );
-  }
-
   function updateSearch(value) {
     setFilters((current) => ({ ...current, q: value }));
   }
@@ -115,7 +104,7 @@ export function Catalog({ products, meta, filters, setFilters, t, addCart }) {
             <article className="product" key={product.id}>
               <div className="product-media">
                 <button className="favorite-button" type="button" aria-label={t("favorite")}>♡</button>
-                <img src={product.image_url} alt={product.name} onLoad={setImageRatio} />
+                <img src={product.image_url} alt={product.name} />
                 <button className="quick-cart" type="button" onClick={() => addCart(product.id)} aria-label={t("add")}>
                   <span aria-hidden="true">▢</span>
                 </button>
